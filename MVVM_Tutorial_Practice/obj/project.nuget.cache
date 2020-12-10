@@ -1,0 +1,12 @@
+{
+  "version": 2,
+  "dgSpecHash": "XGUSTWnmFogmOLvDKMRW7Xgmey+xdu7WmYwFeoHvNC22UAELsB0zxKAPYNxlj8yRto9cHUYCDYk7xYLRUBkGEw==",
+  "success": true,
+  "projectFilePath": "C:\\Users\\m.nezhad\\Desktop\\projects\\MVVM_Tutorial_Practice\\MVVM_Tutorial_Practice\\MVVM_Tutorial_Practice.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\m.nezhad\\.nuget\\packages\\newtonsoft.json\\12.0.3\\newtonsoft.json.12.0.3.nupkg.sha512",
+    "C:\\Users\\m.nezhad\\.nuget\\packages\\microsoft.aspnetcore.app.ref\\3.1.10\\microsoft.aspnetcore.app.ref.3.1.10.nupkg.sha512",
+    "C:\\Users\\m.nezhad\\.nuget\\packages\\microsoft.netcore.app.host.win-x64\\3.1.10\\microsoft.netcore.app.host.win-x64.3.1.10.nupkg.sha512"
+  ],
+  "logs": []
+}

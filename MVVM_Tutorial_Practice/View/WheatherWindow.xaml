@@ -1,0 +1,91 @@
+﻿<Window x:Class="MVVM_Tutorial_Practice.View.WheatherWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:MVVM_Tutorial_Practice.View"
+        xmlns:vm="clr-namespace:MVVM_Tutorial_Practice.ViewModel"
+        xmlns:conv="clr-namespace:MVVM_Tutorial_Practice.ViewModel.Converters"
+        mc:Ignorable="d"
+        Title="WheatherWindow" Height="550" Width="430">
+    <Window.Resources>
+        <vm:WheatherViewModel x:Key="vm"/>
+        <conv:RainingConverter x:Key="raining"/>
+    </Window.Resources>
+
+    <Grid DataContext="{StaticResource vm}">
+        <Grid.Background>
+            <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                <GradientStop Color="#FF7789FF"/>
+                <GradientStop Color="#FFA2CCFF" Offset="1"/>
+                <GradientStop Color="#FF849EFF" Offset="0.233"/>
+            </LinearGradientBrush>
+        </Grid.Background>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+        <StackPanel Margin="20">
+            <TextBlock Text="Search City:" Margin="5"/>
+            <TextBox Margin="8"
+                     BorderThickness="2"
+                     BorderBrush="Gray"
+                     Text="{Binding Query,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"/>
+            <Button Content="Search"
+                    Margin="15"
+                    Command="{Binding searchCommand}"
+                    CommandParameter="{Binding Query}"/>
+            <ListView ItemsSource="{Binding cities}" SelectedValue="{Binding SelectedCity}">
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <Grid>
+                            <TextBlock Text="{Binding LocalizedName}"/>
+                        </Grid>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+        </StackPanel>
+        <Grid Grid.Row="1"
+              DataContext="{Binding wheather}">
+            <Grid.Effect>
+                <DropShadowEffect Color="#FF8DEEEE"
+                                  Direction="443"
+                                  Opacity="0.79" 
+                                  ShadowDepth="6"
+                                  BlurRadius="49.7" />
+            </Grid.Effect>
+            <Grid.Background>
+                <LinearGradientBrush EndPoint="0.5,1" 
+                                     StartPoint="0.5,0">
+                    <GradientStop Color="#FF2063D8"/>
+                    <GradientStop Color="#FF10A8D4"
+                                  Offset="1"/>
+                </LinearGradientBrush>
+            </Grid.Background>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="Auto"/>
+            </Grid.ColumnDefinitions>
+            <StackPanel Margin="0 10">
+                <TextBlock DataContext="{StaticResource vm}" Text="{Binding SelectedCity.LocalizedName}"
+                           Foreground="#f4f4f8"
+                           FontSize="21"
+                           Margin="20 0"/>
+                <TextBlock Text="{Binding WeatherText}"
+                           Foreground="#f4f4f8"
+                           FontSize="17"
+                           Margin="20 0"/>
+                <TextBlock Text="{Binding HasPrecipitation,Converter={StaticResource raining}}"
+                           Foreground="#f4f4f8"
+                           FontSize="17"
+                           Margin="20 0"/>
+            </StackPanel>
+            <TextBlock Grid.Column="1"
+                           VerticalAlignment="Center"
+                           Foreground="#f4f4f8"
+                           Text="{Binding Temperature.Metric.Value,StringFormat={}{0}°C}"
+                           FontSize="28"
+                           Margin="20 0"/>
+        </Grid>
+    </Grid>
+</Window>
